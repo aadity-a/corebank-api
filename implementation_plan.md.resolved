@@ -1,0 +1,52 @@
+# Bank Management System - Implementation Plan
+
+## Goal
+Build a production-ready Bank Management System using Java 17, Spring Boot, Spring Security (JWT), Hibernate, and MySQL. The project will feature role-based access control, transaction management, and a clean layered architecture suitable for a senior-level portfolio.
+
+## User Review Required
+> [!IMPORTANT]
+> Please review this 10-step execution plan and the accompanying **Project Architecture Guide** (which satisfies Step 1). 
+> 
+> If you approve, I will proceed to **Step 2 (Database Schema)** and **Step 3 (Security Setup)**, and begin creating the necessary code files in your workspace.
+
+## Proposed Development Approach
+
+1. **[Completed] Project Architecture & Documentation**
+   - See the `architecture_guide.md` artifact for a detailed breakdown of the folder structure and design decisions, written for a junior developer.
+2. **Database Schema & Initialization**
+   - Design the normalized MySQL schema.
+   - Create `pom.xml` with all required Maven dependencies.
+   - Create `application.properties` with database connection, JPA settings, and JWT secrets.
+   - Outline OneToMany and ManyToOne relationships.
+3. **Security Setup (JWT & Spring Security)**
+   - Implement BCrypt password hashing.
+   - Create JWT Utility class (generate, validate, extract claims).
+   - Create JwtAuthenticationFilter for request interception.
+   - Configure Spring Security (`SecurityFilterChain`).
+4. **Entities (`entity/`)**
+   - Create `User`, `Account`, and `Transaction` entities with auditing fields (`createdAt`, `updatedAt`, `createdBy`, `updatedBy`).
+   - Define JPA relationships (`@OneToMany`, `@ManyToOne`).
+5. **Repositories (`repository/`)**
+   - Create Spring Data JPA repositories.
+   - Add custom queries for checking balances, finding transactions by account, etc.
+6. **Services (`service/`)**
+   - Implement interfaces and implementation classes.
+   - Add business logic (daily limits, freeze checks, soft delete).
+   - Implement `@Transactional` for atomicity during transfers.
+7. **Controllers (`controller/`) & DTOs (`dto/`)**
+   - Create request/response DTOs with Jakarta Validation.
+   - Build REST endpoints for Auth, Accounts, Transactions, Admin, and Employee.
+   - Document with Swagger/OpenAPI.
+8. **Global Exception Handling (`exception/`)**
+   - Implement `@RestControllerAdvice`.
+   - Create custom exceptions (`InsufficientBalanceException`, `ResourceNotFoundException`, etc.).
+   - Standardize API error responses with proper HTTP status codes.
+9. **Testing & Postman Examples**
+   - Generate sample API requests and responses.
+   - Provide Postman testing flows.
+10. **Deployment Guide**
+    - Provide a guide for running the application locally and deploying.
+
+## Open Questions
+- **Workspace:** I will be generating the code. Should I place the new project files in the `c:\Users\Asus\Desktop\Banking application` directory?
+- **Table Prefixes:** Should we use a specific prefix for database tables (e.g., `bank_users`, `bank_accounts`) or just standard names (`users`, `accounts`)?
